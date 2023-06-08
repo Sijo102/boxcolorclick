@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Box Assessment</title>
+    <link rel="stylesheet" href="box.css" />
+  </head>
+
+  <body>
+    <div class="container" onclick="handleClick(event)">
+      <!-- Generate the grid of boxes -->
+      <script>
+        for (var i = 0; i < 6; i++) {
+          for (var j = 0; j < 6; j++) {
+            document.write('<div class="box"></div>');
+          }
+        }
+      </script>
+    </div>
+
+    <script>
+      // Function to handle box click event
+      function handleClick(e) {
+        var clickedBox = e.target;
+
+        // Change background color of clicked box to red
+        clickedBox.style.backgroundColor = "red";
+
+        // Get adjacent boxes
+        // Get all boxes
+        var boxes = document.getElementsByClassName("box");
+
+        // Convert boxes collection to an array
+        var boxArray = Array.from(boxes);
+
+        // Find the clicked box index
+        var clickedIndex = boxArray.findIndex((box) => box === clickedBox);
+
+        // Define the offsets for adjacent boxes
+        var offsets = [-6, 6, -1, 1];
+
+        // Iterate through the offsets
+        offsets.forEach((offset) => {
+          var adjacentIndex = clickedIndex + offset;
+          var adjacentBox = boxArray[adjacentIndex];
+
+          if (adjacentBox) {
+            if (adjacentBox.style.backgroundColor === "red") {
+              alert("You are not allowed to click on adjacent red boxes.");
+            } else {
+              adjacentBox.style.backgroundColor = "white";
+            }
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
